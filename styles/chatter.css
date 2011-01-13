@@ -1,0 +1,127 @@
+body {
+	font-family: 'Trebuchet MS';
+	background-color:#222;
+}
+
+#overlay {
+	opacity: 0.8;
+	background-color:#000;
+	z-index:1000;
+	position:fixed;
+	top:0px;
+	left:0px;
+	height:100%;
+	width:100%;
+}
+
+.username {
+	font-size:90%;
+	color:#555;
+	margin:0px;
+	border-bottom:1px dashed #555;
+}
+
+.comment {
+	margin:5px 0px;
+	color:#bbb;
+}
+
+.post {
+	margin:10px 0px;
+}
+
+#comment {
+	width:600px;
+	margin:10px 0px 10px -300px;
+	position:fixed;
+	bottom:20px;
+	left:50%;
+	
+	padding:10px;
+	font-size:110%;
+	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	opacity:.5;
+	border:1px solid #222;
+}
+
+#chats {
+	width:600px;
+	margin: -250px 0px 0px -300px;
+	height:500px;
+	position:fixed;
+	top:50%;
+	left:50%;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+#login {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	
+	background-color:#ddd;
+	
+	-webkit-box-shadow: 2px 5px 4px #000222;
+	-moz-box-shadow: 2px 5px 4px #000222;
+	box-shadow: 2px 5px 4px #000222;
+	padding:20px;
+	width:350px;
+	height:175px;
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin:-125px 0px 0px -175px;
+	z-index:10001;
+	text-align:right;
+}
+
+.underlined {
+	border-bottom:1px dashed #555;
+}
+
+#login h2 {
+	margin:0px auto;
+	text-align:left;
+	color:#444;
+}
+
+#username {
+	padding:10px;
+	margin:20px auto;
+	font-size:110%;
+	width:90%;
+	opacity:.5;
+	border:1px solid #222;
+	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#connectedUsers {
+	position:fixed;
+	top:20px;
+	left:10px;
+	list-style:none;
+	color:#bbb;
+}
+
+#logo {
+	position:fixed;
+	bottom:10px;
+	left:10px;
+	color:#bbb;
+}
+
+#usernameLabel {
+	font-size:90%;
+}
+
+#logolabel {
+	font-size:160%;
+	font-weight:normal;
+}

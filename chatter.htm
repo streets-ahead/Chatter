@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Chatter</title>
+	<script type="text/javascript" src="http://cdn.socket.io/stable/socket.io.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script type="text/javascript" src="client-scripts/chatter.js"></script>
+	
+	<link rel="stylesheet" href="styles/button.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="styles/chatter.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+	<div id='overlay'>
+	</div>
+	
+	<div id='logo'>
+		<div id='usernameLabel'></div>
+		<div id='logolabel'>Chatter</div>
+	</div>
+	
+	<ul id='connectedUsers'>
+		
+	</ul>
+	
+	<div id='login'>
+		<h2>Welcome, enter your username</h2>
+		<form id='usernameForm'>
+			<input type='text' name='username' id='username'>
+			
+		</form>
+		<a href='#none' class='button orange' id='ok'>OK</a>
+	</div>
+	
+	<div id='chats'> 
+		
+	</div><!-- end chats -->
+	
+	<div id='inputbox'>
+		<form id='commentForm'>
+			<input name='comment' id='comment' type='text'>
+		</form>
+	</div><!-- end inputbox -->
+</body>
+</html>
