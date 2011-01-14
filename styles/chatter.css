@@ -1,6 +1,11 @@
 body {
+	margin:0px;
 	font-family: 'Trebuchet MS';
 	background-color:#222;
+}
+
+a {
+	color:#888;
 }
 
 #overlay {
@@ -109,18 +114,42 @@ body {
 #connectedUsers {
 	position:fixed;
 	top:10px;
-	left:10px;
+	right:10px;
+	text-align:right;
 	list-style:none;
 	color:#bbb;
 	padding:0px;
 	margin:0px;
 }
 
-#logo {
+#connectedUsers li {
+	height:25px;
+	vertical-align:middle;
+}
+
+#footer {
+	background-color:#111;
+	color:#888;
+	border-top:1px solid #888;
+	height:40px;
 	position:fixed;
-	bottom:10px;
-	left:10px;
-	color:#bbb;
+	bottom:0px;
+	width:100%;
+	padding:10px 0px;
+}
+
+#logo {
+	width:200px;
+	float:left;
+	margin:0px 10px;
+}
+
+#info {
+	float:right;
+	width:200px;
+	font-size:80%;
+	text-align:right;
+	margin:0px 10px;
 }
 
 #usernameLabel {

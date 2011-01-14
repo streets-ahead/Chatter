@@ -1,7 +1,8 @@
-var socket = new io.Socket('10.0.0.33');
+var socket = new io.Socket();
 
 var numPosts = 0;
 var username = 'Coward';
+var typing = false;
 
 function handlePost(post) {
 	numPosts++;
@@ -22,7 +23,11 @@ function connect() {
 			console.log(message.userlist);
 			var htm = '<li class="underlined">connected users:</li>';
 			for(var i = 0; i < message.userlist.length; i++) {
-				htm += '<li>' + message.userlist[i] + '</li>';
+				if(message.userlist[i].typing) {
+					htm += '<li><img src="pencil-icon.png" />' + message.userlist[i].username + '</li>';
+				} else {
+					htm += '<li>' + message.userlist[i].username + '</li>';
+				}
 			}
 			
 			$('#connectedUsers').html(htm);
@@ -33,7 +38,7 @@ function connect() {
 }
 
 function send(comment) {
-	var jsonStr = '{"username":"' + username + '","comment":"' + comment + '"}'
+	var jsonStr = '{"username":"' + username + '","comment":"' + comment + '", "typing":' + typing + '}'
 	socket.send(jsonStr);
 }
 
@@ -56,12 +61,27 @@ $(function() {
 		}
 		
 		$('#usernameLabel').html("Welcome, " + username);
-		
 		$('#login,#overlay').fadeOut();
-		commentInput.focus();
 		
 		connect();
 		send("");
+		
+		commentInput.focus();
+		commentInput.keyup(function() {
+			if(commentInput.val() != "") {
+				if(!typing) {
+					typing = true;
+					$('#typing').fadeIn('fast');
+					send("")
+				}
+			} else {
+				if(typing) {
+					typing = false;
+					$('#typing').fadeOut('fast');
+					send("")
+				}
+			}
+		});
 		
 		return false;
 	}

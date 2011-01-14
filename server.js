@@ -14,7 +14,7 @@ server = http.createServer(function(request, response) {
 			return;
 		}
 		
-		fs.readFile(filename, 'binary', function(err, file) {
+		fs.readFile(filename, function(err, file) {
 			if(err) {
 				response.writeHead(500, {'Content-Type':'text/plain'});
 				response.end(err + '\n');
@@ -22,7 +22,7 @@ server = http.createServer(function(request, response) {
 			}
 			
 			response.writeHead(200);
-			response.end(file, 'binary');
+			response.end(file);
 		});
 	} );
 });
@@ -51,7 +51,7 @@ listener.on('connection', function(client){
 	client.on('message', function(data){ 
 		var post = JSON.parse(data);
 		if(post.comment == "") {
-			connectedUsers['sid' + client.sessionId] = post.username;
+			connectedUsers['sid' + client.sessionId] = post;
 			updateUsers();
 		} else {
 			listener.broadcast(data);
