@@ -9,24 +9,22 @@ server = http.createServer(function(request, response) {
 	var filename = path.join(process.cwd(), uri);
 	path.exists(filename, function(exists) {
 		if(!exists) {
-			response.writeHeader(404, {'Content-Type':'text/plain'});
+			response.writeHead(404, {'Content-Type':'text/plain'});
 			response.end("File not found, looser");
 			return;
 		}
 		
 		fs.readFile(filename, 'binary', function(err, file) {
 			if(err) {
-				response.writeHeader(500, {'Content-Type':'text/plain'});
+				response.writeHead(500, {'Content-Type':'text/plain'});
 				response.end(err + '\n');
 				return;
 			}
 			
-			response.sendHeader(200);
-			response.write(file, 'binary');
-			response.close();
+			response.writeHead(200);
+			response.end(file, 'binary');
 		});
 	} );
-	
 });
 
 server.listen(8080);
