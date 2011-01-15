@@ -111,6 +111,7 @@ a {
 	border-radius: 10px;
 }
 
+
 #connectedUsers {
 	position:fixed;
 	top:10px;
@@ -124,7 +125,7 @@ a {
 
 #connectedUsers li {
 	height:25px;
-	vertical-align:middle;
+	vertical-align:top;
 }
 
 #footer {

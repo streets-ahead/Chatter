@@ -24,9 +24,9 @@ function connect() {
 			var htm = '<li class="underlined">connected users:</li>';
 			for(var i = 0; i < message.userlist.length; i++) {
 				if(message.userlist[i].typing) {
-					htm += '<li><img src="pencil-icon.png" />' + message.userlist[i].username + '</li>';
+					htm += '<li><img src="pencil.png" style="" /> ' + message.userlist[i].username + '</li>';
 				} else {
-					htm += '<li>' + message.userlist[i].username + '</li>';
+					htm += '<li><img src="pencil.png" style="visibility:hidden" />' + message.userlist[i].username + '</li>';
 				}
 			}
 			
