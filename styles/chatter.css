@@ -4,6 +4,11 @@ body {
 	background-color:#222;
 }
 
+h1, h2, h3, h4, h5, h6, body, html, p, ul, li {
+	margin:0px;
+	padding:0px;
+}
+
 a {
 	color:#888;
 }
@@ -67,6 +72,11 @@ a {
 	padding:10px;
 }
 
+#opensource {
+	font-size:115%;
+	margin-bottom:10px;
+}
+
 #login {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -111,6 +121,16 @@ a {
 	border-radius: 10px;
 }
 
+#typing {
+	display:none; 
+	color:#555; 
+	position:fixed; 
+	left:50%; 
+	top:30px;
+	width:200px;
+	margin-left:-100px;
+	text-align:center;
+}
 
 #connectedUsers {
 	position:fixed;
@@ -132,7 +152,7 @@ a {
 	background-color:#111;
 	color:#888;
 	border-top:1px solid #888;
-	height:40px;
+	height:50px;
 	position:fixed;
 	bottom:0px;
 	width:100%;
