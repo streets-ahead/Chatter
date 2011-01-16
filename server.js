@@ -6,7 +6,13 @@ var http = require('http'),
 	
 server = http.createServer(function(request, response) {
 	var uri = url.parse(request.url).pathname;
+	
+	if(uri == "/") {
+		uri = "/index.htm"
+	}
+	
 	var filename = path.join(process.cwd(), uri);
+
 	path.exists(filename, function(exists) {
 		if(!exists) {
 			response.writeHead(404, {'Content-Type':'text/plain'});
