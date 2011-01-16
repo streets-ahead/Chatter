@@ -136,7 +136,19 @@ a {
 	position:fixed;
 	top:10px;
 	right:10px;
+	width:200px;
 	text-align:right;
+	list-style:none;
+	color:#bbb;
+	text-align:right;
+}
+
+#connectedUsers h3 {
+	font-weight:normal;
+
+}
+
+#connectedUsers ul {
 	list-style:none;
 	color:#bbb;
 	padding:0px;
@@ -146,6 +158,10 @@ a {
 #connectedUsers li {
 	height:25px;
 	vertical-align:top;
+}
+
+#connectedUsers li img {
+	visibility: hidden;
 }
 
 #footer {
@@ -180,4 +196,37 @@ a {
 #logolabel {
 	font-size:160%;
 	font-weight:normal;
+}
+
+/*
+* scroll bar
+*/
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+    height: 30px;
+    display: block;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #3b3b3b;
+    -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    height: 50px;
+    background-color: #666;
+    -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    width: 50px;
+    background-color: #666;
+    -webkit-border-radius: 3px;
 }

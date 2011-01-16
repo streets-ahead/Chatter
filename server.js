@@ -42,20 +42,38 @@ var userList;
 
 function updateUsers() {
 	userList = new Array();
-	
-	for(var sessionId in connectedUsers) {
-		if(sessionId.indexOf('sid') == 0) {
-			userList.push( connectedUsers[sessionId] );
-		}
-	}
-	
 	var userJSON = JSON.stringify( {"userlist":userList} );	
 	listener.broadcast(userJSON);
+}
+
+var generateMessage = function(type, fields) {
+	var jsonstr = '{"type":"' + type + '",';
+	for(var i = 0; i < fields.length; i+=2) {
+		jsonstr += '"' + fields[i] + '":';
+		jsonstr += fields[i+1] + (i+2 < fields.length ? ',': '');
+	}
+	jsonstr += '}';
+	
+	return jsonstr;
 }
 
 listener.on('connection', function(client){ 
 	client.on('message', function(data){ 
 		var post = JSON.parse(data);
+		
+		switch (post.type) {
+			case 'newuser':
+				connectedUsers['sid' + client.sessionId] = post.user;
+				updateUsers();
+				break;
+			case 'typing':
+				listener.broadcast(data);
+				break;
+			case 'comment':
+				listener.broadcast(data);
+				break;
+		}
+		
 		if(post.comment == "") {
 			connectedUsers['sid' + client.sessionId] = post;
 			updateUsers();
