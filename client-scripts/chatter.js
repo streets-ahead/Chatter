@@ -145,12 +145,15 @@ var Chatter = function() {
 			}
 		}
 		
-		blinkInterval = window.setInterval(changeTitle, 500);
+		if(blinkInterval == null) {
+			blinkInterval = window.setInterval(changeTitle, 500);
+		}
 	}
 	
 	that.stopBlinkTitle = function() {
 		window.clearInterval(blinkInterval);
-		window.setTimeout(function(){document.title = 'Chatter'}, 10);
+		blinkInterval = null;
+		window.setTimeout(function(){document.title = 'Chatter'}, 50);
 		//console.log(document.title);
 	}
 };
