@@ -23,10 +23,14 @@ var Chatter = function() {
 		return jsonstr;
 	}
 	
+	var addZero = function(num) {
+		return num < 10 ? '0' + num : num;
+	}
+	
 	that.handlePost = function (post) {
 		numPosts++;
 		var today = new Date();
-		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		var time = addZero(today.getHours()) + ":" + addZero(today.getMinutes()) + ":" + addZero(today.getSeconds());
 		$('#chats').append('<div class="post" id="post' + numPosts + '" style="display:none">' + 
 								'<p class="username">user: ' + post.user.username + '<span style="float:right">' + time + '</span></p>' +
 								'<p class="comment">' + post.comment + '</p>' +
