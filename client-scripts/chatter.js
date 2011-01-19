@@ -3,15 +3,14 @@ var socket = new io.Socket();
 
 var Chatter = function() {
 	var that = this;
-	
-	that.numPosts = 0;
-	that.username = 'Coward';
-	that.typing = false;
-	that.infocus = true;
-	that.room = ' The Party'
-
+	var numPosts = 0;
+	var typing = false;
+	var room = 'Disco Cafe';
 	var blinkInterval;
-	
+		
+	that.username = 'Coward';
+	that.infocus = true;
+
 	//not very safe
 	that.generateMessage = function(type, fields) {
 		var jsonstr = '{"type":"' + type + '",';
@@ -25,22 +24,22 @@ var Chatter = function() {
 	}
 	
 	that.handlePost = function (post) {
-		that.numPosts++;
+		numPosts++;
 		var today = new Date();
 		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-		$('#chats').append('<div class="post" id="post' + that.numPosts + '" style="display:none">' + 
+		$('#chats').append('<div class="post" id="post' + numPosts + '" style="display:none">' + 
 								'<p class="username">user: ' + post.user.username + '<span style="float:right">' + time + '</span></p>' +
 								'<p class="comment">' + post.comment + '</p>' +
 							'</div>');
-		$('#post' + that.numPosts).fadeIn();
+		$('#post' + numPosts).fadeIn();
 		$("#chats").attr({ scrollTop: $("#chats").attr("scrollHeight") });
 	}
 	
 	that.connect = function () {
 		socket.connect();
-		var newUserMessage = that.generateMessage('newuser', ['user', '{"username":"' + that.username + '", "typing":' + that.typing + '}', 
-																'room', '"' + that.room + '"']);
-		console.log(newUserMessage);
+		var newUserMessage = that.generateMessage('newuser', ['user', '{"username":"' + that.username + '", "typing":' + typing + '}', 
+																'room', '"' + room + '"']);
+		//console.log(newUserMessage);
 		that.send( newUserMessage );
 
 		socket.on('message', function(message) {
@@ -82,7 +81,7 @@ var Chatter = function() {
 		var commentMessage = that.generateMessage('comment', ['comment', 
 																'"' + comment + '"', 
 																'user', 
-																'{"username":"' + that.username + '", "typing":' + that.typing + '}']);
+																'{"username":"' + that.username + '", "typing":' + typing + '}']);
 		that.send(commentMessage);
 		return false;
 	}
@@ -97,31 +96,31 @@ var Chatter = function() {
 		$('#login,#overlay').fadeOut();
 		
 		if(that.roomField.val() != '') {
-			that.room = ' ' + that.roomField.val();
+			room = ' ' + that.roomField.val();
 		}
-		$('#roomlabel').html(that.room);
+		$('#roomlabel').html(room);
 		
 		that.connect();
 		
 		that.commentInput.focus();
 		
 		that.commentInput.keyup(function() {
-			var typingMessage = that.generateMessage('typing', ['user', '{"username":"' + that.username + '", "typing":' + that.typing + '}']);
+			var typingMessage = that.generateMessage('typing', ['user', '{"username":"' + that.username + '", "typing":' + typing + '}']);
 			
 			if(that.commentInput.val() != "") {
-				if(!that.typing) {
-					that.typing = true;
+				if(!typing) {
+					typing = true;
 					var typingMessage = that.generateMessage('typing', ['user', '{"username":"' + that.username + 
-																			'", "typing":' + that.typing + 
+																			'", "typing":' + typing + 
 																			',"userid":"' + socket.transport.sessionid + '"}']);
 					$('#typing').fadeIn('fast');
 					that.send(typingMessage);
 				}
 			} else {
-				if(that.typing) {
-					that.typing = false;
+				if(typing) {
+					typing = false;
 					var typingMessage = that.generateMessage('typing', ['user', '{"username":"' + that.username + 
-																			'", "typing":' + that.typing + 
+																			'", "typing":' + typing + 
 																			',"userid":"' + socket.transport.sessionid + '"}']);
 					$('#typing').fadeOut('fast');
 					that.send(typingMessage);
@@ -134,7 +133,7 @@ var Chatter = function() {
 	
 	that.blinkTitle = function() {
 		var changeTitle = function() {
-			console.log('ads');
+			//console.log('ads');
 			if(document.title.indexOf(':') < 0) {
 				document.title = 'Chatter : new message';
 			} else {
@@ -148,7 +147,7 @@ var Chatter = function() {
 	that.stopBlinkTitle = function() {
 		window.clearInterval(blinkInterval);
 		window.setTimeout(function(){document.title = 'Chatter'}, 10);
-		console.log(document.title);
+		//console.log(document.title);
 	}
 };
 
@@ -172,11 +171,11 @@ $(function() {
 	win.focus(function(){
 		chatter.infocus = true;
 		chatter.stopBlinkTitle();
-		console.log('focus');
+		//console.log('focus');
 	});
 	
 	win.blur(function(){
 		chatter.infocus = false;
-				console.log('blur');
+				//console.log('blur');
 	});
 });
