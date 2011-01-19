@@ -6,6 +6,7 @@
 	<script type="text/javascript" src="http://cdn.socket.io/stable/socket.io.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 	<script type="text/javascript" src="client-scripts/chatter.js"></script>
+		<script type="text/javascript" src="client-scripts/userlist.js"></script>
 	
 	<link rel="stylesheet" href="styles/button.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<link rel="stylesheet" href="styles/chatter.css" type="text/css" media="screen" title="no title" charset="utf-8">
@@ -13,7 +14,9 @@
 <body>
 	<div id='overlay'>
 	</div>
-	
+	<div id='room'>
+		<h3>room:<span id='roomlabel'></span></h3>
+	</div>
 
 	<div id='connectedUsers'>
 		<h3 class='underlined'>connected users:</h3>
@@ -23,10 +26,12 @@
 	</div>
 	
 	<div id='login'>
-		<h2>Welcome, enter your username</h2>
+		<h2>Welcome, enter your username:</h2>
 		<form id='usernameForm'>
 			<input type='text' name='username' id='username'>
-			
+			<h2>and room name:</h2>
+			<input type='text' name='roomname' id='roomname'>
+			<div style='height:0px; width:0px; overflow:hidden'><input type='submit'></div>
 		</form>
 		<a href='#none' class='button orange' id='ok'>OK</a>
 	</div>
@@ -48,7 +53,7 @@
 	<div id='footer'>
 		<div id='logo'>
 			<div id='usernameLabel'></div>
-			<div id='logolabel'>Chatter</div>
+			<div id='logolabel'>Chatter v0.2</div>
 		</div><!-- end logo -->
 		<div id='info'>
 			<div id='opensource'>Source available on <a href='https://github.com/streets-ahead/Chatter'>GitHub</a></div>

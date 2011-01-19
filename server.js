@@ -37,14 +37,9 @@ server.listen(8080);
 console.log("listening on 8080");
 
 var listener = io.listen(server);
-var connectedUsers = {};
-var userList;
 
-function updateUsers() {
-	userList = new Array();
-	var userJSON = JSON.stringify( {"userlist":userList} );	
-	listener.broadcast(userJSON);
-}
+var roomlist = new Object();
+var globalUserList = new Object();
 
 var generateMessage = function(type, fields) {
 	var jsonstr = '{"type":"' + type + '",';
@@ -57,34 +52,74 @@ var generateMessage = function(type, fields) {
 	return jsonstr;
 }
 
+var room = function(name) {
+	this.name = name;
+	this.userlist = new Object();
+	
+	this.addUser = function (userid, message) {
+		console.log('adding user' + message.user);
+		this.sendMessage(message);
+		this.userlist['uid' + userid] = message.user;
+	}
+	
+	this.removeUser = function (userid) {
+		console.log('removing user ' + userid);
+		delete this.userlist['uid' + userid];
+		var removeMessage = generateMessage('removeuser', ['userid', '"uid' + userid + '"']);
+		this.sendMessage(removeMessage);
+	}
+	
+	this.sendMessage = function(message) {
+		
+		var messageStr;
+		if(typeof message === 'string'){
+			messageStr = message
+		} else {
+			messageStr = JSON.stringify(message);
+		}
+		console.log('sending message ' + messageStr);
+		for(userid in this.userlist) {
+			listener.clientsIndex[userid.substr(3)].send(messageStr);
+		}
+	}
+}
+
 listener.on('connection', function(client){ 
 	client.on('message', function(data){ 
-		var post = JSON.parse(data);
-		
-		switch (post.type) {
+		var message = JSON.parse(data);
+		console.log(message);
+		switch(message.type) {
 			case 'newuser':
-				connectedUsers['sid' + client.sessionId] = post.user;
-				updateUsers();
-				break;
-			case 'typing':
-				listener.broadcast(data);
+				if(!roomlist[message.room]) {
+					roomlist[message.room] = new room(message.room);
+				} 
+				
+				var usersRoom = roomlist[message.room];
+				message.userid = 'uid' + client.sessionId;
+				usersRoom.addUser(client.sessionId, message);
+				globalUserList[client.sessionId] = usersRoom;
+				
+				var userliststr = JSON.stringify(usersRoom.userlist);
+				var userlistMessage = generateMessage('userlist', ['userlist', userliststr]);
+				
+				listener.clientsIndex[client.sessionId].send( userlistMessage );
 				break;
 			case 'comment':
-				listener.broadcast(data);
+				var usersRoom = globalUserList[client.sessionId];
+				usersRoom.sendMessage(data);
 				break;
-		}
-		
-		if(post.comment == "") {
-			connectedUsers['sid' + client.sessionId] = post;
-			updateUsers();
-		} else {
-			listener.broadcast(data);
+			case 'typing':
+				var usersRoom = globalUserList[client.sessionId];
+				usersRoom.sendMessage(data);
+				break;
 		}
 	});
 	
 	client.on('disconnect', function() {
-		delete connectedUsers['sid' + client.sessionId];
-		updateUsers();
+		var userRoom = globalUserList[client.sessionId];
+		console.log('removing disconected user ' + client.sessionId + ' ' + userRoom);
+		delete globalUserList[client.sessionId];
+		userRoom.removeUser(client.sessionId);
 	});
 });
 

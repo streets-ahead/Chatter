@@ -10,22 +10,25 @@ UserList.prototype.loadUsers = function (userlist) {
 	
 	for(userid in this.users) {
 		var style = this.users[userid].typing ? 'style="visibility:visible"' : '';
-		this.$ule.append('<li><img src="pencil.png" ' + style + ' />' + 
+		this.$ule.append('<li id="' + userid + '"><img width="16" height="16"  src="pencil.png" ' + style + ' /> ' + 
 							this.users[userid].username + 
-						'</li>');
+						' </li>');
 	}
 }
 
 UserList.prototype.removeUser = function (userid) {
-	$('uid' + userid).remove();
+	console.log('removing ' + userid);
+	$('#' + userid).remove();
 	delete this.users[userid];
 }
 
 UserList.prototype.setTyping = function (userid, typing) {
 	if(typing) {
-		$('uid' + userid + ' img').css('visiblity', 'visible');
+		console.log('setting typing to visible ' + '#uid' + userid + ' img');
+		$('#uid' + userid + ' img').css('visibility', 'visible');
+
 	} else {
-		$('uid' + userid + ' img').css('visiblity', 'hidden');
+		$('#uid' + userid + ' img').css('visibility', 'hidden');
 	}
 	
 }
@@ -33,7 +36,8 @@ UserList.prototype.setTyping = function (userid, typing) {
 UserList.prototype.addUser = function (userid, userObj) {
 	this.users[userid] = userObj;
 	var style = this.users[userid].typing ? 'style="visibility:visible"' : '';
-	this.$ule.append('<li id=uid' + userid + '><img src="pencil.png" ' + style + '/>' + this.users[userid].username + '</li>');
+	console.log(userid);
+	this.$ule.append('<li id="' + userid + '"><img width="16" height="16" src="pencil.png" ' + style + '/> ' + this.users[userid].username + ' </li>');
 }
 
 UserList.prototype.clearUsers = function () {

@@ -1,0 +1,17 @@
+{
+	"type":"newuser" | "typing" | "comment" | "userlist" | "removeuser",
+	"userlist":{
+		"userid":{
+			"username":"",
+			"typing":true | false
+		},
+		"userid":{},
+		...
+	},
+	"comment":"",
+	"userid":uid
+	"user":{
+		"username":"",
+		"typing":true | false,
+	}
+}

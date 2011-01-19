@@ -89,11 +89,11 @@ a {
 	box-shadow: 2px 5px 4px #000222;
 	padding:20px;
 	width:350px;
-	height:175px;
+	height:250px;
 	position:fixed;
 	top:50%;
 	left:50%;
-	margin:-125px 0px 0px -175px;
+	margin:-190px 0px 0px -175px;
 	z-index:10001;
 	text-align:right;
 }
@@ -108,9 +108,9 @@ a {
 	color:#444;
 }
 
-#username {
+#username, #roomname {
 	padding:10px;
-	margin:20px auto;
+	margin:15px auto;
 	font-size:110%;
 	width:90%;
 	opacity:.5;
@@ -132,20 +132,27 @@ a {
 	text-align:center;
 }
 
-#connectedUsers {
+#connectedUsers, #room {
 	position:fixed;
 	top:10px;
 	right:10px;
 	width:200px;
 	text-align:right;
-	list-style:none;
 	color:#bbb;
 	text-align:right;
 }
 
-#connectedUsers h3 {
-	font-weight:normal;
+#connectedUsers ul {
+	list-style:none;
+}
 
+#connectedUsers h3, #room h3 {
+	font-weight:normal;
+}
+
+#room {
+	left:10px;
+	text-align:left;
 }
 
 #connectedUsers ul {
