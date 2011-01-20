@@ -153,8 +153,8 @@ var Chatter = function() {
 	that.stopBlinkTitle = function() {
 		window.clearInterval(blinkInterval);
 		blinkInterval = null;
-		window.setTimeout(function(){document.title = 'Chatter'}, 50);
-		//console.log(document.title);
+		document.title = 'Chatter';
+		window.setTimeout(function(){document.title = 'Chatter';}, 10);
 	}
 };
 
@@ -164,6 +164,8 @@ $(function() {
 	chatter.commentInput = $('#comment');
 	chatter.usernameField = $('#username');
 	chatter.roomField = $('#roomname');
+	
+	$('.formback').formDefault();
 	
 	$('#commentForm').submit(chatter.onChatSubmit);
 	

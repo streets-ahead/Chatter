@@ -1,3 +1,11 @@
+@font-face {
+	font-family: 'Museo300';
+	src: url('../fonts/Museo300-Regular-webfont.eot');
+	src: local('☺'), url('../fonts/Museo300-Regular-webfont.woff') format('woff'), url('../fonts/Museo300-Regular-webfont.ttf') format('truetype'), url('../fonts/Museo300-Regular-webfont.svg#webfontyPrgsNm7') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
 	margin:0px;
 	font-family: 'Trebuchet MS';
@@ -47,6 +55,7 @@ a {
 	bottom:0px;
 	padding:10px;
 	font-size:110%;
+	outline:none;
 	
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -108,17 +117,36 @@ a {
 	color:#444;
 }
 
-#username, #roomname {
-	padding:10px;
-	margin:15px auto;
-	font-size:110%;
-	width:90%;
-	opacity:.5;
-	border:1px solid #222;
-	
+.formback {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+	opacity:.5;	
+	border:1px solid #222;
+	background-color:#fff;
+	position:relative;
+	margin:10px auto;
+	font-size:110%;
+	width:90%;
+}
+
+.formback label {
+	position:absolute;
+	z-index:50;
+	top:10px;
+	left:10px;
+	color:#999;
+}
+
+.formback input[type='text'] {
+	position:relative;
+	z-index:100;
+	padding:10px;
+	font-size:100%;
+	width:100%;
+	outline:none;
+	border:none;
+	background-color:transparent;
 }
 
 #typing {
@@ -148,6 +176,11 @@ a {
 
 #connectedUsers h3, #room h3 {
 	font-weight:normal;
+	font-family: 'Museo300',Arial,sans-serif;
+}
+
+#roomlabel {
+	font-family: 'Trebuchet MS';
 }
 
 #room {
@@ -197,12 +230,13 @@ a {
 }
 
 #usernameLabel {
-	font-size:90%;
+	font-size:100%;
 }
 
 #logolabel {
 	font-size:160%;
 	font-weight:normal;
+	font-family: 'Museo300',Arial,sans-serif;
 }
 
 /*
@@ -210,7 +244,7 @@ a {
 */
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
     height: 6px;
 }
 
