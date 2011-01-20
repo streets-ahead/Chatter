@@ -151,10 +151,12 @@ var Chatter = function() {
 	}
 	
 	that.stopBlinkTitle = function() {
+		var changeItBack = function () {
+			document.title = 'Chatter';
+		}
 		window.clearInterval(blinkInterval);
 		blinkInterval = null;
-		document.title = 'Chatter';
-		window.setTimeout(function(){document.title = 'Chatter';}, 10);
+		window.setTimeout(changeItBack, 1);
 	}
 };
 
