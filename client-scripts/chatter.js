@@ -39,6 +39,27 @@ var Chatter = function() {
 		$("#chats").attr({ scrollTop: $("#chats").attr("scrollHeight") });
 	}
 	
+	that.loadNewImage = function(path) {
+		var imageBox = $('#imagebox');
+		var spinner = imageBox.find('#spinner');
+		spinner.addClass('spinner');
+		var img = new Image();
+		var $img = $(img);
+		$img.load(function () {
+			$img.css('padding', '10px');
+			$img.hide();
+			$img.width(230);
+			$img.height(230);
+			spinner.removeClass('spinner');
+			console.log($img.find('img'));
+			var old = spinner.find('img');
+			old.fadeOut();
+			old.remove();
+			spinner.append(img);
+			$img.fadeIn();
+		}).attr('src', path);
+	}
+	
 	that.connect = function () {
 		socket.connect();
 		var newUserMessage = that.generateMessage('newuser', ['user', '{"username":"' + that.username + '", "typing":' + typing + '}', 
@@ -63,6 +84,9 @@ var Chatter = function() {
 						that.blinkTitle();
 					}
 					that.handlePost(data);
+					break;
+				case 'newimage':
+					that.loadNewImage(data.url);
 					break;
 				case 'removeuser':
 					that.userlist.removeUser(data.userid);
@@ -100,10 +124,10 @@ var Chatter = function() {
 		$('#login,#overlay').fadeOut();
 		
 		if(that.roomField.val() != '') {
-			room = ' ' + that.roomField.val();
+			room = that.roomField.val();
 		}
 		$('#roomlabel').html(room);
-		
+		that.initShare();
 		that.connect();
 		
 		that.commentInput.focus();
@@ -157,6 +181,36 @@ var Chatter = function() {
 		window.clearInterval(blinkInterval);
 		blinkInterval = null;
 		window.setTimeout(changeItBack, 1);
+	}
+	
+	that.initShare = function() {
+		var uploaddialog = $('#uploadformdialog');
+		$('#imagebox a').click(function() {
+			$('#overlay').fadeIn();
+			uploaddialog.fadeIn();
+			console.log('show upload');
+			return false;
+		});
+		
+		$('#share').click(function() {
+			$('#uploadForm').submit();
+			that.fadeOutUpload();
+		});
+		
+		$('#cancel').click(function() {
+			that.fadeOutUpload();
+		});
+		
+		$('#uploadForm').ajaxForm({
+			"data":{"room":room},
+			"iframe":true,
+			"resetForm":true
+		});
+	}
+	
+	that.fadeOutUpload = function() {
+		$('#overlay,#uploadformdialog').fadeOut();
+		that.commentInput.focus();
 	}
 };
 

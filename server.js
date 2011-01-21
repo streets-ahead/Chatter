@@ -2,17 +2,27 @@ var http = require('http'),
 	url = require('url'),
 	path = require('path'),
 	fs = require('fs'),
-	io = require('socket.io');
-	
-server = http.createServer(function(request, response) {
-	var uri = url.parse(request.url).pathname;
-	
-	if(uri == "/") {
-		uri = "/index.htm"
-	}
-	
-	var filename = path.join(process.cwd(), uri);
+	io = require('socket.io'),
+	formidable = require('formidable'),
+	sys = require('sys');
 
+function handleUpload(req, res) {
+	var form = new formidable.IncomingForm();
+	form.uploadDir = 'uploads';
+	form.keepExtensions = true;
+    form.parse(req, function(err, fields, files) {
+		res.writeHead(200, {'content-type': 'text/plain'});
+		res.write('received upload:\n\n');
+		res.end(sys.inspect({fields: fields, files: files}));
+		console.log(roomlist);
+		console.log(fields['room']);
+		roomlist[fields['room']].sendMessage( generateMessage('newimage', ['url', '"' + files.upload.path + '"']) );
+   	});
+}
+
+function handleOther(uri, request, response) {
+	var filename = path.join(process.cwd(), uri);
+console.log(uri);
 	path.exists(filename, function(exists) {
 		if(!exists) {
 			response.writeHead(404, {'Content-Type':'text/plain'});
@@ -31,6 +41,24 @@ server = http.createServer(function(request, response) {
 			response.end(file);
 		});
 	} );
+}
+	
+server = http.createServer(function(request, response) {
+	var uri = url.parse(request.url).pathname;
+	console.log(uri);
+	switch(uri){
+		case "/upload":
+			handleUpload(request, response);
+			break;
+		case "/": 
+			uri = "/index.htm";
+		default:
+			handleOther(uri, request, response);
+	}
+	
+	
+	
+
 });
 
 server.listen(8080);

@@ -87,6 +87,10 @@ a {
 }
 
 #login {
+	text-align:right;
+}
+
+.dialog {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
@@ -96,6 +100,7 @@ a {
 	-webkit-box-shadow: 2px 5px 4px #000222;
 	-moz-box-shadow: 2px 5px 4px #000222;
 	box-shadow: 2px 5px 4px #000222;
+	
 	padding:20px;
 	width:350px;
 	height:250px;
@@ -104,14 +109,17 @@ a {
 	left:50%;
 	margin:-190px 0px 0px -175px;
 	z-index:10001;
-	text-align:right;
+}
+
+#uploadformdialog {
+	display:none;
 }
 
 .underlined {
 	border-bottom:1px dashed #555;
 }
 
-#login h2 {
+.dialog h2 {
 	margin:0px auto;
 	text-align:left;
 	color:#444;
@@ -237,6 +245,41 @@ a {
 	font-size:160%;
 	font-weight:normal;
 	font-family: 'Museo300',Arial,sans-serif;
+}
+
+#imagebox {
+	position:fixed;
+	left:10px;
+	top:30%;
+
+}
+
+#spinner {
+	background-color:#ddd;
+	width:250px;
+	height:250px;
+}
+
+.buttons {
+	width:100%;
+	margin-top:10px;
+	text-align:right;
+}
+
+.spinner {
+	background: url('../camera_small.png') center center no-repeat;
+}
+
+#uploadformdialog {
+	height:110px;
+}
+
+.spacing {
+	margin-top:10px;
+}
+
+#uploadformdialog input {
+	padding:10px;
 }
 
 /*

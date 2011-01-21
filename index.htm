@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="client-scripts/formdefault.jquery.js"></script>
 	<script type="text/javascript" src="client-scripts/chatter.js"></script>
 	<script type="text/javascript" src="client-scripts/userlist.js"></script>
-
+	<script type="text/javascript" src="client-scripts/jquery.form.js"></script>
 	
 	<link rel="stylesheet" href="styles/button.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<link rel="stylesheet" href="styles/chatter.css" type="text/css" media="screen" title="no title" charset="utf-8">
@@ -27,7 +27,19 @@
 		</ul>
 	</div>
 	
-	<div id='login'>
+	<div id='uploadformdialog' class='dialog'>
+		<h2>Share Image</h2>
+		<div>
+			<form id='uploadForm' action="/upload" enctype="multipart/form-data" method="post">
+			    <label for='upload'>File: </label><input type="file" name="upload" id='upload' multiple="multiple"><br>
+		    </form>
+			<div class='buttons'>
+				<a href='#none' class='button orange' id='share'>Share</a> <a href='#none' class='button orange' id='cancel'>Cancel</a>
+			</div>
+		</div>
+	</div>
+	
+	<div id='login' class='dialog'>
 		<h2>Welcome, enter your username:</h2>
 		<form id='usernameForm'>
 			<div class='formback'><label for='username'>username</label><input type='text' name='username' id='username'></div>
@@ -37,6 +49,13 @@
 		</form>
 		<a href='#none' class='button orange' id='ok'>OK</a>
 	</div>
+
+	<div id='imagebox'>
+		<div id='spinner' class='spinner'>
+			
+		</div>
+		<div class='spacing'><a href='#none'>share image</a></div>
+	</div><!-- end imagebox-->
 
 	<div id='chatbox'>
 		<div id='chats'> 
