@@ -42,7 +42,6 @@ var Chatter = function() {
 	that.loadNewImage = function(path) {
 		var imageBox = $('#imagebox');
 		var spinner = imageBox.find('#spinner');
-		spinner.addClass('spinner');
 		var img = new Image();
 		var $img = $(img);
 		$img.load(function () {

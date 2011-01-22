@@ -6,10 +6,17 @@
 	font-style: normal;
 }
 
+html {
+	margin:0px;
+	padding:0px;
+	height:100%;
+}
+
 body {
 	margin:0px;
 	font-family: 'Trebuchet MS';
 	background-color:#222;
+	height:100%;
 }
 
 h1, h2, h3, h4, h5, h6, body, html, p, ul, li {
@@ -66,17 +73,17 @@ a {
 
 #chatbox {
 	width:550px;
-	margin: -250px 0px 0px -250px;
-	height:500px;
-	position:fixed;
-	top:50%;
+	margin: 50px auto;
+	height:80%;
+/*	top:50%;
 	left:50%;
+*/
 }
 
 #chats {
 	overflow-y:auto;
 	overflow-x:hidden;
-	height: 400px;
+	height: 90%;
 	border:1px solid #555;
 	padding:10px;
 }
