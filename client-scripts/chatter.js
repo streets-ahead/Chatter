@@ -50,7 +50,6 @@ var Chatter = function() {
 			$img.width(230);
 			$img.height(230);
 			spinner.removeClass('spinner');
-			console.log($img.find('img'));
 			var old = spinner.find('img');
 			old.fadeOut();
 			old.remove();
@@ -187,7 +186,6 @@ var Chatter = function() {
 		$('#imagebox a').click(function() {
 			$('#overlay').fadeIn();
 			uploaddialog.fadeIn();
-			console.log('show upload');
 			return false;
 		});
 		

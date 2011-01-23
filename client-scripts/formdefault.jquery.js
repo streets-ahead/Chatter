@@ -4,20 +4,17 @@
   
     var max = 0;
 
-	var settings = {
-		'default-value' : 'default',
-		"stay-blank" : false
-	};
-
-	if ( options ) { 
-		$.extend( settings, options );
-	}
-
    return this.each(function() {
 		$this = $(this);
 		var overlay = $this.children('label');
 		var form = $this.children("input");
-console.log(overlay.length);
+		
+		$(window).bind('load.formDefault', function() {
+			if(form.val() != '') {
+				overlay.hide();
+			}
+		});
+
 		var updateForm = function(val, newVal) {
 			if(form.val() == ''){
 				overlay.fadeIn('fast');
@@ -27,16 +24,13 @@ console.log(overlay.length);
 		}
 		
 		form.bind('keyup.formDefault', function() {
-			console.log('calling keyup');
 			updateForm();
 		
 		});
 		form.bind('focus.formDefault', function() {
-			console.log('calling focus');
 			updateForm();
 		});
 		form.bind('blur.formDefault', function() {
-			console.log('calling blur');
 			updateForm();
 		});
     });
