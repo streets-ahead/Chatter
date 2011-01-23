@@ -58,8 +58,8 @@ a {
 #comment {
 	width:530px;
 	margin:20px 0px 0px 0px;
-	position:relative;
-	bottom:0px;
+	position:fixed;
+	bottom:100px;
 	padding:10px;
 	font-size:110%;
 	outline:none;
@@ -73,17 +73,18 @@ a {
 
 #chatbox {
 	width:550px;
-	margin: 50px auto;
-	height:80%;
-/*	top:50%;
+	margin: 0px 0px 0px -275px;
+	position:fixed;
+	top:50px;
+	bottom:200px;
 	left:50%;
-*/
+
 }
 
 #chats {
 	overflow-y:auto;
 	overflow-x:hidden;
-	height: 90%;
+	height: 100%;
 	border:1px solid #555;
 	padding:10px;
 }
@@ -164,12 +165,12 @@ a {
 	background-color:transparent;
 }
 
-#typing {
+#status {
 	display:none; 
 	color:#555; 
 	position:fixed; 
 	left:50%; 
-	top:30px;
+	top:20px;
 	width:200px;
 	margin-left:-100px;
 	text-align:center;

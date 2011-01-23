@@ -55,10 +55,6 @@ server = http.createServer(function(request, response) {
 		default:
 			handleOther(uri, request, response);
 	}
-	
-	
-	
-
 });
 
 server.listen(8080);
@@ -145,12 +141,15 @@ listener.on('connection', function(client){
 	
 	client.on('disconnect', function() {
 		var userRoom = globalUserList[client.sessionId];
-		console.log('removing disconected user ' + client.sessionId + ' ' + userRoom);
-		delete globalUserList[client.sessionId];
-		userRoom.removeUser(client.sessionId);
+		if(userRoom) {
+			console.log('removing disconected user ' + client.sessionId + ' ' + userRoom);
+			delete globalUserList[client.sessionId];
+			userRoom.removeUser(client.sessionId);
+		}	
 	});
 });
 
 process.openStdin().addListener("data", function(text) {
+	console.log('broadcasting message ' + text);
 	listener.broadcast(text);
 });

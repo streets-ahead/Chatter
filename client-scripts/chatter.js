@@ -140,7 +140,7 @@ var Chatter = function() {
 					var typingMessage = that.generateMessage('typing', ['user', '{"username":"' + that.username + 
 																			'", "typing":' + typing + 
 																			',"userid":"' + socket.transport.sessionid + '"}']);
-					$('#typing').fadeIn('fast');
+					$('#status').fadeIn('fast');
 					that.send(typingMessage);
 				}
 			} else {
@@ -149,7 +149,7 @@ var Chatter = function() {
 					var typingMessage = that.generateMessage('typing', ['user', '{"username":"' + that.username + 
 																			'", "typing":' + typing + 
 																			',"userid":"' + socket.transport.sessionid + '"}']);
-					$('#typing').fadeOut('fast');
+					$('#status').fadeOut('fast');
 					that.send(typingMessage);
 				}
 			}

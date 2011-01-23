@@ -10,11 +10,14 @@
 		var socket = new io.Socket();
 		socket.connect();
 		socket.on('message', function(data) {
-			$(body).append(data);
+			console.log(data);
+			//$('#test').append(data);
 		});
 	</script>
 </head>
 <body>
-	
+	<div id='test'>
+		
+	</div>
 </body>
 </html>
