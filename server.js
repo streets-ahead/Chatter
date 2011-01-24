@@ -43,7 +43,7 @@ console.log(uri);
 			
 			if(endsWith(uri, '.eot')) {
 				response.writeHead(200, {'Content-Type': 'application/vnd.ms-fontobject'});
-			} else if (endsWith(uri, '.otf') || url.endsWith(uri, '.ttf')){
+			} else if (endsWith(uri, '.otf') || endsWith(uri, '.ttf')){
 				response.writeHead(200, {'Content-Type': 'application/octet-stream'});
 			} else {
 				response.writeHead(200);
