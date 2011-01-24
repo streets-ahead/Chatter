@@ -20,8 +20,8 @@ function handleUpload(req, res) {
    	});
 }
 
-String.prototype.endsWith = function(str) {
-	return (this.match(str+"$") == str);
+var endsWith = function(fullstr, substr) {
+	return (fullstr.match(substr+"$") == substr);
 }
 
 function handleOther(uri, request, response) {
@@ -41,9 +41,9 @@ console.log(uri);
 				return;
 			}
 			
-			if(url.endsWith('.eot')) {
+			if(endsWith(uri, '.eot')) {
 				response.writeHead(200, {'Content-Type': 'application/vnd.ms-fontobject'});
-			} else if (url.endsWith('.otf') || url.endsWith('.ttf')){
+			} else if (endsWith(uri, '.otf') || url.endsWith(uri, '.ttf')){
 				response.writeHead(200, {'Content-Type': 'application/octet-stream'});
 			} else {
 				response.writeHead(200);
