@@ -43,9 +43,9 @@ console.log(uri);
 			
 			if(endsWith(uri, '.eot')) {
 				response.writeHead(200, {'Content-Type': 'application/vnd.ms-fontobject'});
-			} else if (endsWith(uri, '.ttf')){
+			} else if (endsWith(uri, '.ttf') ){
 				response.writeHead(200, {'Content-Type': 'font/ttf'});
-			} else if(endsWith(uri, '.otf')) {
+			} else if ( endsWith(uri, '.otf') ) {
 				response.writeHead(200, {'Content-Type': 'font/otf'});
 			} else {
 				response.writeHead(200);
