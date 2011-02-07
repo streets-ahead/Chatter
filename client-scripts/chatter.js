@@ -1,7 +1,7 @@
 // when deployed to the server need to change to var socket = new io.Socket('chatterapp.info', {"port":8080});
 var socket;
 
-if (window.location.host = "chatterapp.info"){
+if (window.location.host == "chatterapp.info"){
 	socket = new io.Socket('chatterapp.info', {"port":8080})
 }else {
 	socket = new io.Socket();
