@@ -2,7 +2,7 @@
 
 var UserList = function(userListElement) {
 	this.$ule = $(userListElement);
-	this.users = new Object();
+	this.users = {};
 }
 
 UserList.prototype.loadUsers = function (userlist) {
