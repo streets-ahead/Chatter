@@ -7,6 +7,7 @@ if (window.location.host == "chatterapp.info"){
 	socket = new io.Socket();
 }
 
+//could probably refactor to ues prototypes, however I like being able to have "private" vars and metohds
 var Chatter = function() {
 	var that = this;
 	var numPosts = 0;
