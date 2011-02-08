@@ -139,6 +139,11 @@ listener.on('connection', function(client){
 				var userlistMessage = generateMessage('userlist', ['userlist', userliststr]);
 				
 				listener.clientsIndex[client.sessionId].send( userlistMessage );
+				usersRoom.sendMessage(generateMessage('comment', ['comment', 
+																		'"Welcome to Chatter, a fun experiment from the folks at ' + 
+																		'<a href=\'http://streetsaheadllc.com\' target=\'_blank\'>Streets Ahead LLC</a>."', 
+																		'user', 
+																		'{"username":"Streets Ahead", "typing":false}']));
 				break;
 			case 'comment':
 				var usersRoom = globalUserList[client.sessionId];
