@@ -1,3 +1,11 @@
+/**
+ * A little jQuery plugin to handle inner labels for forms.
+ *
+ * Written by Streets Ahead LLC. http://streetsaheadllc.com
+ * You are free to use this plugin source if it helps you, 
+ * just please give us credit if you use it in full.
+ */ 
+
 (function( $ ){
 
   $.fn.formDefault = function(options) {
