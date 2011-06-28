@@ -50,7 +50,7 @@ var endsWith = function(fullstr, substr) {
 
 function handleOther(uri, request, response) {
 	var filename = path.join(process.cwd(), uri);
-console.log(uri);
+	console.log(uri);
 	path.exists(filename, function(exists) {
 		if(!exists) {
 			response.writeHead(404, {'Content-Type':'text/plain'});
