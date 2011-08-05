@@ -26,7 +26,6 @@ var http = require('http'),
 	url = require('url'),
 	path = require('path'),
 	fs = require('fs'),
-	io = require('socket.io').listen(8080),
 	formidable = require('formidable'),
 	sys = require('sys');
 
@@ -95,7 +94,7 @@ server = http.createServer(function(request, response) {
 
 server.listen(8080);
 console.log("listening on 8080");
-
+var io = require('socket.io').listen(server);
 var listener = io.sockets;
 
 var roomlist = new Object();
