@@ -26,9 +26,8 @@
 var socket;
 
 if (window.location.host == "chatterapp.info"){
-	socket = io.connect('http://chatterapp.info');//io.Socket('chatterapp.info', {"port":8080})
+	socket = new io.Socket('chatterapp.info', {"port":8080})
 }else {
-	console.log('setting default socket address')
 	socket = new io.Socket();
 }
 
@@ -91,7 +90,7 @@ var Chatter = function() {
 	}
 	
 	that.connect = function () {
-
+		socket.connect();
 		var newUserMessage = that.generateMessage('newuser', ['user', '{"username":"' + that.username + '", "typing":' + typing + '}', 
 																'room', '"' + room + '"']);
 		//console.log(newUserMessage);

@@ -26,6 +26,7 @@ var http = require('http'),
 	url = require('url'),
 	path = require('path'),
 	fs = require('fs'),
+	io = require('socket.io'),
 	formidable = require('formidable'),
 	sys = require('sys');
 
@@ -94,8 +95,8 @@ server = http.createServer(function(request, response) {
 
 server.listen(8080);
 console.log("listening on 8080");
-var io = require('socket.io').listen(server);
-var listener = io.sockets;
+
+var listener = io.listen(server);
 
 var roomlist = new Object();
 var globalUserList = new Object();
@@ -154,37 +155,37 @@ listener.on('connection', function(client){
 				} 
 				
 				var usersRoom = roomlist[message.room];
-				message.userid = 'uid' + client.id;
-				usersRoom.addUser(client.id, message);
-				globalUserList[client.id] = usersRoom;
+				message.userid = 'uid' + client.sessionId;
+				usersRoom.addUser(client.sessionId, message);
+				globalUserList[client.sessionId] = usersRoom;
 				
 				var userliststr = JSON.stringify(usersRoom.userlist);
 				var userlistMessage = generateMessage('userlist', ['userlist', userliststr]);
 				
-				listener.clientsIndex[client.id].send( userlistMessage );
-				listener.clientsIndex[client.id].send(generateMessage('comment', ['comment', 
+				listener.clientsIndex[client.sessionId].send( userlistMessage );
+				listener.clientsIndex[client.sessionId].send(generateMessage('comment', ['comment', 
 																		'"Welcome to Chatter, a fun experiment from the folks at ' + 
 																		'<a href=\'http://streetsaheadllc.com\' target=\'_blank\'>Streets Ahead LLC</a>."', 
 																		'user', 
 																		'{"username":"Streets Ahead", "typing":false}']));
 				break;
 			case 'comment':
-				var usersRoom = globalUserList[client.id];
+				var usersRoom = globalUserList[client.sessionId];
 				usersRoom.sendMessage(data);
 				break;
 			case 'typing':
-				var usersRoom = globalUserList[client.id];
+				var usersRoom = globalUserList[client.sessionId];
 				usersRoom.sendMessage(data);
 				break;
 		}
 	});
 	
 	client.on('disconnect', function() {
-		var userRoom = globalUserList[client.id];
+		var userRoom = globalUserList[client.sessionId];
 		if(userRoom) {
-			console.log('removing disconected user ' + client.id + ' ' + userRoom);
-			delete globalUserList[client.id];
-			userRoom.removeUser(client.id);
+			console.log('removing disconected user ' + client.sessionId + ' ' + userRoom);
+			delete globalUserList[client.sessionId];
+			userRoom.removeUser(client.sessionId);
 		}	
 	});
 });
