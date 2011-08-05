@@ -188,7 +188,6 @@ var Chatter = function() {
 		return false;
 	}
 	
-	
 	that.blinkTitle = function() {
 		var changeTitle = function() {
 			//console.log('ads');
