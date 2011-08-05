@@ -28,6 +28,7 @@ var socket;
 if (window.location.host == "chatterapp.info"){
 	socket = new io.Socket('chatterapp.info', {"port":8080})
 }else {
+	console.log('setting default socket address')
 	socket = new io.Socket();
 }
 
