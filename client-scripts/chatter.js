@@ -91,7 +91,7 @@ var Chatter = function() {
 	}
 	
 	that.connect = function () {
-		socket.connect();
+
 		var newUserMessage = that.generateMessage('newuser', ['user', '{"username":"' + that.username + '", "typing":' + typing + '}', 
 																'room', '"' + room + '"']);
 		//console.log(newUserMessage);
