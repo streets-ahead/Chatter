@@ -38,8 +38,8 @@ function handleUpload(req, res) {
 		res.writeHead(200, {'content-type': 'text/plain'});
 		res.write('received upload:\n\n');
 		res.end(sys.inspect({fields: fields, files: files}));
-		console.log(roomlist);
-		console.log(fields['room']);
+		//console.log(roomlist);
+		//console.log(fields['room']);
 		roomlist[fields['room']].sendMessage( generateMessage('newimage', ['url', '"' + files.upload.path + '"']) );
    	});
 }
@@ -50,7 +50,7 @@ var endsWith = function(fullstr, substr) {
 
 function handleOther(uri, request, response) {
 	var filename = path.join(process.cwd(), uri);
-	console.log(uri);
+	//console.log(uri);
 	path.exists(filename, function(exists) {
 		if(!exists) {
 			response.writeHead(404, {'Content-Type':'text/plain'});
@@ -81,7 +81,7 @@ function handleOther(uri, request, response) {
 	
 server = http.createServer(function(request, response) {
 	var uri = url.parse(request.url).pathname;
-	console.log(uri);
+	//console.log(uri);
 	switch(uri){
 		case "/upload":
 			handleUpload(request, response);
@@ -94,7 +94,7 @@ server = http.createServer(function(request, response) {
 });
 
 server.listen(8080);
-console.log("listening on 8080");
+//console.log("listening on 8080");
 
 var listener = io.listen(server);
 
@@ -117,13 +117,13 @@ var room = function(name) {
 	this.userlist = new Object();
 	
 	this.addUser = function (userid, message) {
-		console.log('adding user' + message.user);
+		//console.log('adding user' + message.user);
 		this.sendMessage(message);
 		this.userlist['uid' + userid] = message.user;
 	}
 	
 	this.removeUser = function (userid) {
-		console.log('removing user ' + userid);
+		//console.log('removing user ' + userid);
 		delete this.userlist['uid' + userid];
 		var removeMessage = generateMessage('removeuser', ['userid', '"uid' + userid + '"']);
 		this.sendMessage(removeMessage);
@@ -137,7 +137,7 @@ var room = function(name) {
 		} else {
 			messageStr = JSON.stringify(message);
 		}
-		console.log('sending message ' + messageStr);
+		//console.log('sending message ' + messageStr);
 		for(userid in this.userlist) {
 			listener.clientsIndex[userid.substr(3)].send(messageStr);
 		}
@@ -147,7 +147,7 @@ var room = function(name) {
 listener.on('connection', function(client){ 
 	client.on('message', function(data){ 
 		var message = JSON.parse(data);
-		console.log(message);
+		//console.log(message);
 		switch(message.type) {
 			case 'newuser':
 				if(!roomlist[message.room]) {
@@ -183,7 +183,7 @@ listener.on('connection', function(client){
 	client.on('disconnect', function() {
 		var userRoom = globalUserList[client.sessionId];
 		if(userRoom) {
-			console.log('removing disconected user ' + client.sessionId + ' ' + userRoom);
+			//console.log('removing disconected user ' + client.sessionId + ' ' + userRoom);
 			delete globalUserList[client.sessionId];
 			userRoom.removeUser(client.sessionId);
 		}	
@@ -191,6 +191,6 @@ listener.on('connection', function(client){
 });
 
 process.openStdin().addListener("data", function(text) {
-	console.log('broadcasting message ' + text);
+	//console.log('broadcasting message ' + text);
 	listener.broadcast(text);
 });
