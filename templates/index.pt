@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<%=html.createTitle('Welcome to ' + data.frameworkName)%>
+	
+	<!-- include jQuery because it is awesome -->
+	<%=html.createScript('http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js')%>
+
+	<!-- include main client javascript -->
+	<%=html.createScript('client_scripts/main.js')%>
+
+	<!-- include main stylesheet -->
+	<%=html.createStyle('css/main.css')%>
+	
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io.connect('http://localhost/chatter');
+		socket.emit('my other event', { my: 'data' });
+	</script>
+</head>
+<body>
+	<div id='main'>	
+		<h1>Welcome to <%=data.frameworkName%></h1>
+		<p>Welcome to lazyBum, the awesome Node.js web framework from the people at <%=html.createLink('http://streetsaheadllc.com', 'Streets Ahead LLC')%>.  lazyBum is all about simplicity, we don't want too many layers of abstraction between us and the wonderful Node.js platform.  lazyBum makes it insanely easy to produce quick apps, whether you need to create a services api, a full web app, or both lazyBum is here to help.</p>	
+
+		<p>lazyBum works similarly to other modern MVC frameworks, it embraces a convention over configuration approach.  To get started create a controller:</p>
+
+<pre>
+  &gt; lazybum create controller helloworld
+</pre>
+	</div>
+</body>
+</html>

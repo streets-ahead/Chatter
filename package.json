@@ -1,0 +1,32 @@
+{
+	"name": "chatter",
+	"description": "",
+	"version": "1.0.0",
+	"author": "",
+	"homepage": "",
+	"contributors": [
+		{ "name": "", "email": "" }
+	],
+	"repository": {
+		"type": "git",
+		"url": "" 
+	},
+	"keywords": [""],
+	"dependencies": {
+		"lazyBum" : ">= 0.2.0",
+        "socket.io": ">= 0.8.0"
+	},
+	"directories": {
+		"controllers" : "./controllers",
+		"helpers" : "./helpers",
+		"hooks" : "./hooks",
+		"logs" : "./logs",
+		"collections" : "./collections",
+		"public" : "./public",
+		"renderers" : "./renderers",
+		"template" : "./template",
+		"tests" : "./tests"
+  	},
+  	"main" : "./main.js",
+	"engines": { "node": ">= 0.4.4" }
+}
